@@ -1,8 +1,14 @@
 {
-  	"presets": ["stage-3"],
-  	"plugins": [
-  		"transform-async-to-generator",
-        "transform-es2015-modules-commonjs",
-        "transform-export-extensions"
-    ]
+  "presets": [
+    ["env", { "modules": false }],
+    "stage-2"
+  ],
+  "plugins": ["transform-runtime"],
+  "comments": false,
+  "env": {
+    "test": {
+      "presets": ["env", "stage-2"],
+      "plugins": [ "istanbul" ]
+    }
+  }
 }
