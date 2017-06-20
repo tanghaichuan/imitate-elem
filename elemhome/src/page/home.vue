@@ -5,8 +5,11 @@
     		<navmenu></navmenu>
     	</el-col>	
     	<el-col :span="20">
+    		<el-col :span="24">
+				111111111111111111111111111111111111111111111
+    		</el-col>
     		<router-view></router-view>
-    	</el-col>	
+    	</el-col>
     </el-row>
   </div>
 </template>
@@ -31,6 +34,9 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
 .home,.el-row{
+	position: absolute;
+	width: 100%;
 	height: 100%;
+	z-index: -1;
 }
 </style>

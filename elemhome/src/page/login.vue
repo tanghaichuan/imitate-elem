@@ -6,32 +6,32 @@
    		</div>
   	</transition>
    	<transition name="slide-fade">
-   		<section class="form_container" v-show="showFrom">
-	   		<el-form ref="loginForm" :model="loginForm" :rules="rules">
-				<el-form-item prop="username">
-					<el-input 
-					placeholder="用户名" 
-					v-model="loginForm.username"
-					></el-input>
-				</el-form-item>
-				<el-form-item prop="password">
-					<el-input 
-					type="password" 
-					placeholder="密码"
-					v-model="loginForm.password"
-					></el-input>
-				</el-form-item>
-				<el-form-item>
-					<el-button 
-					type="primary" 
-					class="submit_btn"
-					@click="submitForm('loginForm')"
-					>登陆</el-button>
-				</el-form-item>
-			</el-form> 
-			<p class="tip">超级管理员账号：admin 密码：123456</p>
-	   	</section>
-   	</transition>	
+   			<section class="form_container" v-show="showFrom">
+   			   		<el-form ref="loginForm" :model="loginForm" :rules="rules">
+   						<el-form-item prop="username">
+   							<el-input 
+   							placeholder="用户名" 
+   							v-model="loginForm.username"
+   							></el-input>
+   						</el-form-item>
+   						<el-form-item prop="password">
+   							<el-input 
+   							type="password" 
+   							placeholder="密码"
+   							v-model="loginForm.password"
+   							></el-input>
+   						</el-form-item>
+   						<el-form-item>
+   							<el-button 
+   							type="primary" 
+   							class="submit_btn"
+   							@click="submitForm('loginForm')"
+   							>登陆</el-button>
+   						</el-form-item>
+   					</el-form> 
+   					<p class="tip">超级管理员账号：admin 密码：123456</p>
+   			   	</section>
+   		</transition>	
    	
   </div>
 </template>
