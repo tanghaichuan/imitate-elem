@@ -4,6 +4,8 @@ import Router from 'vue-router'
 
 const home = r => require.ensure([], () => r(require('@/page/home')), 'home');
 const login = r => require.ensure([], () => r(require('@/page/login')), 'login');
+const contain = r => require.ensure([], () => r(require('@/page/contain')), 'contain');
+const navmenu = r => require.ensure([], () => r(require('@/page/navmenu')), 'navmenu');
 
 Vue.use(Router)
 
@@ -19,7 +21,7 @@ export default new Router({
     	name: '',
     	children: [{
     	  path: '',
-			  component: home
+			  component: contain
     	}]
     }
   ]

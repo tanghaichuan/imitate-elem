@@ -11,7 +11,5 @@ export const getTest = () => getData('/api/test');
  * 登录
  */
 
-export const login = data => getData('/api/admin/login');
- 
-
+export const login = data => getData('/api/admin/login',data,'post');
 

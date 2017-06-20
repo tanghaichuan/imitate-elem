@@ -12,7 +12,8 @@ export default {
 
 <style>
 @import './common/less/main.less';
-body{
-
+html,body,#app{
+	width: 100%;
+	height: 100%;
 }
 </style>

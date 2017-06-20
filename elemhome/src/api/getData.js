@@ -36,9 +36,9 @@ export default async(url = '', data = {}, method = 'get') => {
 	}else{
 		try {
 			let res =await postAxios(url,data);
-			let resJson =await JSON.stringify(res.data);
-			console.log(1);
-			return resJson;
+			return res.data;
+			//let resJson = JSON.stringify(res.data[0]);
+			//return resJson;
 		} catch (error) {
 			throw new Error(error)
 		}

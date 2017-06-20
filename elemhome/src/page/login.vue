@@ -62,13 +62,31 @@ export default {
   	async submitForm(loginForm){
   		this.$refs[loginForm].validate(async valid => {
   			if(valid){
-  				const res = await login();
-  				console.log(res);
-  				/*this.$message({
-			        type: 'success',
-			        message: '登录成功'
-			    });
-			    this.$router.push('home');*/
+  				const data = {
+  					username: this.loginForm.username,
+  					password: this.loginForm.password
+  				}
+  				const res = await login(data);
+  				//console.log(res);
+  				if(res.status === 1){
+  					this.$message({
+				        type: 'success',
+				        message: '登录成功'
+				    });
+				    this.$router.push('home');
+  				}else{
+  					this.$message({
+  						type: 'error',
+		                message: '登录失败'
+  					});
+  				}
+  			}else{
+  				this.$notify.error({
+					title: '错误',
+					message: '请输入正确的用户名密码',
+					offset: 100
+				});
+				return false;
   			}
   			
   		})

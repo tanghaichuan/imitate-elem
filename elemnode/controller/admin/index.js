@@ -13,9 +13,65 @@ class Admin{
 	}
 
 	async login(req,res,next) {
-		//const form = new formidable.IncomingForm();
-		//res.send(form);
-		res.send('login');
+		// formidable表单数据处理模块
+		const form = new formidable.IncomingForm();
+		form.parse(req, (err, fields, files) => {
+			if (err) {
+				res.send({
+					status: 0,
+					type: 'FORM_DATA_ERROR',
+					message: '表单信息错误'
+				})
+				return
+			}
+			const {username, password, status = 2} = fields;
+			/*res.send({
+				username:username,
+				password:password,
+				status:2
+			})*/
+			try {
+				if(!username) {
+					throw new Error('用户名参数错误');
+				}
+				else if(!password){
+					throw new Error('密码参数错误');
+				}
+			}
+			catch(err){
+				res.send({
+					status: 0,
+					type: 'GET_ERROR_PARAM',
+					message: err.message,
+				})
+				return
+			}
+			const md5Pwd = this.encryption(password);
+			try {
+				let sql = `select * from admin where username='${username}' and password='${md5Pwd}'`;
+				query(sql, (err, rows) => {
+					if(err || rows.length === 0) {
+						res.send({
+							status: 0,
+							type: 'LOGIN_ADMIN_FAILED',
+							message: '登录管理员失败',
+						})
+					}else{
+						//记录session
+
+						res.send({
+							status: 1,
+							success: '登录成功',
+						})
+					}
+				})	
+
+			}
+			catch(err) {
+
+			}
+
+		})
 	}
 
 	async register(req,res,next) {
