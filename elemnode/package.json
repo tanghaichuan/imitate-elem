@@ -24,6 +24,7 @@
     "debug": "~2.6.3",
     "express": "~4.15.2",
     "express-session": "^1.15.2",
+    "formidable": "^1.1.1",
     "jade": "~1.11.0",
     "mongodb": "^2.2.25",
     "mongoose": "^4.9.3",
@@ -31,7 +32,8 @@
     "mysql": "^2.13.0",
     "mysql-queues": "^1.0.0",
     "pm2": "^2.4.6",
-    "serve-favicon": "~2.4.2"
+    "serve-favicon": "~2.4.2",
+    "time-formater": "^1.0.1"
   },
   "devDependencies": {
     "babel-plugin-transform-async-to-generator": "^6.24.1",

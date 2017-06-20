@@ -1,9 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var Test = require('../initData/data.json');
-
-var app = express();
-
+//var Test = require('../initData/data.json');
 
 /* GET users listing. */
 /*router.get('/', function(req,res){

@@ -1,0 +1,11 @@
+
+/*清除浮动*/
+  .clearfix{
+    zoom:1;
+    &:after{
+      clear:both;   
+      overflow:hidden; 
+      content:"";   
+      display:table; 
+    }
+  }
