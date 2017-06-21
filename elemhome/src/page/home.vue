@@ -6,9 +6,11 @@
     	</el-col>	
     	<el-col :span="20">
     		<el-col :span="24">
-				111111111111111111111111111111111111111111111
+				<headerbar></headerbar>
     		</el-col>
-    		<router-view></router-view>
+    		<el-col :span="24" style="padding: 25px 40px 0 40px;">
+    			<router-view></router-view>
+    		</el-col>
     	</el-col>
     </el-row>
   </div>
@@ -17,6 +19,7 @@
 <script>
 import contain from './contain';
 import navmenu from './navmenu';
+import headerbar from '@/components/headerbar';
 export default {
   name: 'home',
   data () {
@@ -26,7 +29,8 @@ export default {
   },
   components: {
   	contain,
-  	navmenu
+  	navmenu,
+  	headerbar
   }
 }
 </script>
