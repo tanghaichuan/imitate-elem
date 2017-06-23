@@ -4,10 +4,46 @@ var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
-var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var router = require('./routes/index.js');
+//var mysql = require('mysql');
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+//var MySQLStore = require('express-mysql-session');
 
-var app = require('./routes/index.js');
+var app = express();
+/*var db = require('./mysql/db');
+
+var options = {
+  host: db.host,
+  port: db.post,
+  user: db.user,
+  password: db.password,
+  database: db.database,
+  schema: {
+    tableName: 'session',
+    columnNames: {
+      session_id: 'id',
+      expires: 'expires',
+      data: 'data'
+    }
+  }
+};*/
+
+//var sessionStore = new MySQLStore(options,mysql.createConnection(db));
+
+// secret,resave,saveUninitialized，官方认为不安全而去掉了默认，因此需要手动设置操作
+app.use(session({
+    secret: 'keyboard cat',
+    cookie: {
+        maxAge: 6 * 60 * 60 * 1000,
+    },
+    resave: false,
+    saveUninitialized: false
+}));
+
+// 注意！！！使用session的话router要放到session后面，否则req.session为undefined
+app.use(router);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -20,7 +56,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
 
 app.all('*', (req, res, next) => {
   res.header("Access-Control-Allow-Origin", req.headers.origin);

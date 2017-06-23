@@ -28,54 +28,87 @@ export default new Router({
     	path: '/home',
     	component: home,
     	name: '',
+      meta: {
+          requireAuth: true
+      },
     	children: [{
     	  path: '',
-			  component: contain
+			  component: contain,
+        meta: {
+          requireAuth: true
+        },
     	},
       {
         path: '/addShop',
         component: addShop,
-        meta: ['添加数据', '添加商铺'],
+        meta: {
+          nav:['添加数据', '添加商铺'],
+          requireAuth: true
+        }
       },
       {
         path: '/addGoods',
         component: addGoods,
-        meta: ['添加数据', '添加商品'],
+        meta: {
+          nav:['添加数据', '添加商品'],
+          requireAuth: true
+        }
       },
       {
         path: '/userList',
         component: userList,
-        meta: ['数据管理', '用户列表'],
+        meta: {
+          nav:['数据管理', '用户列表'],
+          requireAuth: true
+        }
       },
       {
         path: '/shopList',
         component: shopList,
-        meta: ['数据管理', '商家列表'],
+        meta: {
+          nav:['数据管理', '商家列表'],
+          requireAuth: true
+        }
       },
       {
         path: '/foodList',
         component: foodList,
-        meta: ['数据管理', '食品列表'],
+        meta: {
+          nav:['数据管理', '食品列表'],
+          requireAuth: true
+        }
       },
       {
         path: '/orderList',
         component: orderList,
-        meta: ['数据管理', '订单列表'],
+        meta: {
+          nav:['数据管理', '订单列表'],
+          requireAuth: true
+        }
       },
       {
         path: '/adminList',
         component: adminList,
-        meta: ['数据管理', '管理员列表'],
+        meta: {
+          nav:['数据管理', '管理员列表'],
+          requireAuth: true
+        }
       },
       {
         path: '/visitor',
         component: visitor,
-        meta: ['图表', '用户分布'],
+        meta: {
+          nav:['图表', '用户分布'],
+          requireAuth: true
+        }
       },
       {
         path: '/adminSet',
         component: adminSet,
-        meta: ['设置', '管理员设置'],
+        meta: {
+          nav:['设置', '管理员设置'],
+          requireAuth: true
+        }
       }
       ]
     }

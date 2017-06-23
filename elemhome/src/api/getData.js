@@ -9,7 +9,7 @@ async function getAxios(url) {
 }
 
 export default async(url = '', data = {}, method = 'get') => {
-	// 由于axios是异步promise，所以axios内部的return无效
+	// axios是异步promise，if语句会先执行完
 	/*if(method === 'get'){
 		getAxios(url).then(res => {
 			console.log(res.data);
@@ -28,8 +28,9 @@ export default async(url = '', data = {}, method = 'get') => {
 	if(method === 'get'){
 		try {
 			let res =await getAxios(url);
-			let resJson =await JSON.stringify(res.data);
-			return resJson;
+			//let resJson = JSON.stringify(res.data);
+			//console.log(res);
+			return res.data;
 		} catch (error) {
 			throw new Error(error)
 		}

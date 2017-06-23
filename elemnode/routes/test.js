@@ -24,7 +24,8 @@ var router = express.Router();
 	console.log(req.body.id);
 	res.send('respond with a resource');
 })*/
-router.get('/test',function(req,res){
-	res.send('test');
+router.get('/test',function(req,res,next){
+	//req.session.isLogin = "1";
+	console.log(req.session);
 })
 module.exports = router;

@@ -13,11 +13,11 @@
 		    >
 		      <span class="el-dropdown-link userInfo">
 		        <img src="../common/img/avator.jpeg" width="30" height="30" class="avator">
-		        <span class="username">起个名字真难</span>
+		        <span class="username">{{adminInfo.username}}</span>
 		        <i ref="icon" class="el-icon-arrow-up"></i>
 		      </span>
 		      <div class="singOut">
-		      	<a href="javascript:void(0)">
+		      	<a href="javascript:void(0)" @click="singout">
 		    	  <i class="el-icon-setting"></i>
 		    	  <span>退出</span>
 		    	</a>
@@ -35,6 +35,8 @@
 
 <script>
 import breadcrumb from './breadcrumb';
+import {mapActions, mapState} from 'vuex'
+import {singout} from '@/api/api';
 export default {
   name: 'headerbar',
   data () {
@@ -45,7 +47,16 @@ export default {
   components: {
   	breadcrumb
   },
+  created() {
+  	if(!this.adminInfo.username){
+  		this.getLoginData();
+  	}
+  },
+  computed: {
+  	...mapState(['adminInfo'])
+  },
   methods: {
+  	...mapActions(['getLoginData']),
   	handleCommand(command) {
   		if(command === "home"){
 
@@ -63,9 +74,25 @@ export default {
   			icon.style.transform = "rotate("+this.deg+"deg)";
   		}	
   	},
-  	watch: {
-  		iconRotate(val){
-  			console.log(val);
+  	async singout() {
+  		try {
+  			let res = await singout();
+  			if(res.status === 1 ){
+  				this.$message({
+	                type: 'success',
+	                message: '退出成功'
+	            });
+	            sessionStorage.removeItem('username');	 // 移除session记录的登录状态
+	            this.getLoginData();     				 // 将登录状态置空
+	            this.$router.push('/');
+  			}else{
+				this.$message({
+	            	type: 'error',
+	            	message: "退出失败"
+	        	});
+			}
+  		}catch(err) {
+  			console.error(err);
   		}
   	}
   }
@@ -103,8 +130,8 @@ export default {
 	&:hover{
 		cursor:pointer;
 	}
-	.el-icon-arrow-down{
-
+	.el-icon-arrow-up{
+		margin-top: 2px;
 	}
 }
 .singOut{

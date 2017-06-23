@@ -25,6 +25,7 @@
    							<el-button 
    							type="primary" 
    							class="submit_btn"
+                :autofocus="true"
    							@click="submitForm('loginForm')"
    							>登陆</el-button>
    						</el-form-item>
@@ -51,13 +52,16 @@ export default {
       	rules:{
       		username:[
       			{ 
-      				required:true,message:'请输入用户名',trigger:'blur'
-
+      				required:true,
+              message:'请输入用户名',
+              trigger:'blur'
       			}
       		],
       		password:[
       			{ 
-      				required:true,message:'请输入密码',trigger:'blur'
+      				required:true,
+              message:'请输入密码',
+              trigger:'blur'
       			}
       		]
       	}
@@ -65,7 +69,7 @@ export default {
   },
   methods:{
   	async submitForm(loginForm){
-  		this.$refs[loginForm].validate(async valid => {
+  		this.$refs.loginForm.validate(async valid => {
   			if(valid){
   				const data = {
   					username: this.loginForm.username,
@@ -78,11 +82,13 @@ export default {
 				        type: 'success',
 				        message: '登录成功'
 				    });
+            // 将管理员登录信息记录在sessionStorage
+            sessionStorage.setItem('username', res.data.username);
 				    this.$router.push('home');
   				}else{
   					this.$message({
   						type: 'error',
-		                message: '登录失败'
+		           message: '登录失败'
   					});
   				}
   			}else{
@@ -93,12 +99,20 @@ export default {
 				});
 				return false;
   			}
-  			
   		})
-  	}
+  	},
+    async enterSubmit(ev){
+      if(ev.key === 'Enter' ){
+        this.submitForm(this.loginForm);
+      }
+    }
   },
   mounted(){
   	this.showFrom = true;
+    document.addEventListener('keydown', this.enterSubmit);
+  },
+  beforeDestroy() {
+    document.removeEventListener('keydown', this.enterSubmit);
   }
 }
 </script>

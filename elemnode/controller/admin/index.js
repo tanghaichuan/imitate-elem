@@ -4,18 +4,19 @@ import formidable from 'formidable'
 import dtime from 'time-formater'
 import query from '../../mysql/index';
 
-
 class Admin{
 	constructor(){
 		this.login = this.login.bind(this)
 		this.register = this.register.bind(this)
 		this.encryption = this.encryption.bind(this)
 	}
-
+	async test() {
+		return 1;
+	}
 	async login(req,res,next) {
 		// formidable表单数据处理模块
-		const form = new formidable.IncomingForm();
-		form.parse(req, (err, fields, files) => {
+		const form =await new formidable.IncomingForm();
+		form.parse(req, async(err, fields, files) => {
 			if (err) {
 				res.send({
 					status: 0,
@@ -49,26 +50,25 @@ class Admin{
 			const md5Pwd = this.encryption(password);
 			try {
 				let sql = `select * from admin where username='${username}' and password='${md5Pwd}'`;
-				query(sql, (err, rows) => {
-					if(err || rows.length === 0) {
-						res.send({
-							status: 0,
-							type: 'LOGIN_ADMIN_FAILED',
-							message: '登录管理员失败',
-						})
-					}else{
-						//记录session
-
-						res.send({
-							status: 1,
-							success: '登录成功',
-						})
-					}
-				})	
-
+				let rows = await query(sql);
+				if(rows.length === 0) {
+					res.send({
+						status: 0,
+						type: 'LOGIN_ADMIN_FAILED',
+						message: '登录管理员失败',
+					})
+				}else{
+					//记录session
+					req.session.admin_id = rows.id;
+					res.send({
+						status: 1,
+						success: '登录成功',
+						data:rows
+					})
+				}
 			}
 			catch(err) {
-
+				console.log(err);
 			}
 
 		})
@@ -81,8 +81,8 @@ class Admin{
 		const create_time = dtime().format('YYYY-MM-DD');
 		const status = 2;
 		//const sql = "insert into admin(username,password,create_time,status) values("+ username + "," + password + "," + create_time+ "," + status+")";
-		const sql = `insert into admin(username,password,create_time,status) values('${username}','${newPwd}','${create_time}','${status}')`;
-		const select = `select * from admin`; 
+		let sql = `insert into admin(username,password,create_time,status) values('${username}','${newPwd}','${create_time}','${status}')`;
+		let select = `select * from admin`; 
 		query(sql, (err, rows) => {
 			if(err){
 				res.send(err);
@@ -140,6 +140,60 @@ class Admin{
 				})
 			}
 		})*/
+	}
+	async singout(req, res, next) {
+		try {
+			if(req.session.admin_id){
+				delete req.session.admin_id;
+				res.send({
+					status: 1,
+					success: '退出成功'
+				})
+				return
+			}else{
+				res.send({
+					status: 1,
+					success: '退出成功'
+				})
+			}
+			
+		}catch(err) {
+			console.log('退出失败', err)
+			res.send({
+				status: 0,
+				message: '退出失败'
+			})
+		}
+	}
+
+	async getAdminInfo(req, res, next) {
+		const admin_id = req.session.admin_id;
+		if(!admin_id || !Number(admin_id)) {
+			res.send({
+				status: 0,
+				type: 'ERROR_SESSION',
+				message: '获取管理员信息失败'
+			});
+			return
+		}
+		try {
+			let sql = `select * from admin where id = '${admin_id}'`;
+			const adminInfo = await query(sql);
+			if (!adminInfo) {
+				throw new Error('未找到当前管理员');
+			}else{
+				res.send({
+					status: 1,
+					data: adminInfo
+				})
+			}
+		} catch(err) {
+			res.send({
+				status: 0,
+				type: 'GET_ADMIN_INFO_FAILED',
+				message: '获取管理员信息失败'
+			})
+		}
 	}
 
 	encryption(password){
