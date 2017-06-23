@@ -8,8 +8,8 @@
 # install dependencies
 npm install
 
-# serve with hot reload at localhost:8080
-npm run dev
+# serve with hot reload at localhost:3002
+npm run dev(需要先运行elemnode服务端)
 
 # build for production with minification
 npm run build
