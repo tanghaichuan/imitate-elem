@@ -11,7 +11,6 @@ import VCharts from 'v-charts'
 Vue.use(ElementUI)
 Vue.use(VCharts)
 
-
 Vue.config.productionTip = false
 
 router.beforeEach((to, from, next) => {

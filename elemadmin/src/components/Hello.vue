@@ -7,6 +7,7 @@
 
 <script>
 import extend from '../mixins/extend';
+import {getTest} from '../api/api'
 
 export default {
   name: 'hello',
@@ -21,18 +22,14 @@ export default {
   methods: {
     
   },
-  created() {
-    this.$http.get('/api/test')
-        .then(res => {
-          console.log(res.bodyText);
-        },err => {
-          console.log(err);
-      });
+  async created() {
+    let res = await getTest();
+    console.log(res);
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-  
+<style scoped lang="less">
+
 </style>

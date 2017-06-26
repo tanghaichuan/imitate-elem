@@ -26,6 +26,6 @@ var router = express.Router();
 })*/
 router.get('/test',function(req,res,next){
 	//req.session.isLogin = "1";
-	console.log(req.session);
+	res.send("test");
 })
 module.exports = router;

@@ -15,11 +15,14 @@ const orderList = r => require.ensure([], () => r(require('@/page/orderList')), 
 const adminList = r => require.ensure([], () => r(require('@/page/adminList')), 'adminList');
 const visitor = r => require.ensure([], () => r(require('@/page/visitor')), 'visitor');
 const adminSet = r => require.ensure([], () => r(require('@/page/adminSet')), 'adminSet');
+const notFound = r => require.ensure([], () => r(require('@/page/notfound')), 'notfound');
+
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
+
     {
       	path: '/',
       	component: login
@@ -111,6 +114,10 @@ export default new Router({
         }
       }
       ]
+    },
+    {
+      path: '*', 
+      component: notFound
     }
   ]
 })
