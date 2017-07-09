@@ -21,8 +21,8 @@ const notFound = r => require.ensure([], () => r(require('@/page/notfound')), 'n
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
-
     {
       	path: '/',
       	component: login
