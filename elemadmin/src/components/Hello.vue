@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <p>从后台获取数据</p>
-
+    <span class="icon-add_circle"></span>
   </div>
 </template>
 
@@ -23,13 +23,12 @@ export default {
     
   },
   async created() {
-    let res = await getTest();
-    console.log(res);
+    
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
-
+@import '../common/less/common.less';
 </style>
