@@ -1,3 +1,13 @@
+//清除浮动
+.clearfix{
+  zoom:1;
+  &:after{
+    clear:both;   
+    overflow:hidden; 
+    content:"";   
+    display:table; 
+  }
+}
 // 字体
 .fs34{
   font-size: 15px;
@@ -135,6 +145,9 @@
 }
 
 // padding margin
+.mg(@top, @right, @bottom, @left){
+    margin: @top / 75 * 1rem @right / 75 * 1rem @bottom / 75 * 1rem @left / 75 * 1rem;
+}
 .mt(@px){
     margin-top: @px / 75 * 1rem;
 }

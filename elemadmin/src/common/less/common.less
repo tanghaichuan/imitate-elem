@@ -1,3 +1,4 @@
+@import './config.less';
 @font-face {
   font-family: 'sell-icon';
   src:  url('../fonts/sell-icon.eot?m0rtc1');
@@ -53,4 +54,32 @@
 }
 .icon-thumb_up:before {
   content: "\e909";
+}
+
+.icon{
+  display: inline-block;
+  vertical-align: top;
+  .width(24);
+  .height(24);
+  .mr(8);
+  &.decrease{
+    background: url(../../common/img/decrease_1.png) center center no-repeat;
+    background-size: 100% auto;
+  }
+  &.discount{
+    background: url(../../common/img/discount_1.png) center center no-repeat;
+    background-size: 100% auto;
+  }
+  &.guarantee{
+    background: url(../../common/img/guarantee_1.png) center center no-repeat;
+    background-size: 100% auto;
+  }
+  &.invoice{
+    background: url(../../common/img/invoice_1.png) center center no-repeat;
+    background-size: 100% auto;
+  }
+  &.special{
+    background: url(../../common/img/special_1.png) center center no-repeat;
+    background-size: 100% auto;
+  }
 }
