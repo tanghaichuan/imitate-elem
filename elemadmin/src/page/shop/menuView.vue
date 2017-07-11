@@ -45,7 +45,7 @@ export default {
   .menu-category{
     flex: 0 0 160/75*1rem;
     .width(160);
-    background: #f3f5f7;
+    background: #f8f8f8;
     ul{
       .pd(0, 24, 0, 24);
     }
@@ -57,15 +57,16 @@ export default {
       border-bottom: 1px solid rgba(7,17,27,0.1);
       .icon{
         margin: 0;
-        .width(32);
         .height(24);
+        width: .346667rem;
       }
       .text{
         display: table-cell;
         .width(112);
         vertical-align: middle;
         .lh(26);
-        .fs(24);
+        font-size: .346667rem;
+        color: #666;
       }
     }
   }
