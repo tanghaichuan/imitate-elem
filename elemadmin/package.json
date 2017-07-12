@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
+    "better-scroll": "^0.4.0",
     "express": "^4.15.3",
     "fastclick": "^1.0.6",
     "mysql": "^2.13.0",
