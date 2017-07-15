@@ -49,6 +49,7 @@ export default {
 <style scoped lang="less">
 @import '../../common/less/config.less';
 .shop{
+  height: 100%;
   .tab{
     display: flex;
     width: 100%;

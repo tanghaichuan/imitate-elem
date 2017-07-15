@@ -76,7 +76,7 @@ export default {
     left: 0;
     width: 100%; 
     height: 100%;
-    filter:blur(10px);
+    //filter:blur(10px);
     z-index: -1;
   }
   .navbar-left{

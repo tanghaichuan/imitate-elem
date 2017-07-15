@@ -26,5 +26,8 @@ body{
 	position: relative;
   z-index: -1;
   overflow: hidden;
+  #app{
+    height: 100%;
+  }
 }
 </style>

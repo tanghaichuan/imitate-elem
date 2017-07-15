@@ -28,13 +28,16 @@
                 <div class="price">
                   <span class="now">￥{{food.price}}</span><span class="old" v-show="food.oldPrice">￥{{food.oldPrice}}</span>
                 </div>
+                <div class="cart-wrapper">
+                  <cart-control :food="food"></cart-control>
+                </div>
               </div>
             </li>
           </ul>
         </li>
       </ul>
     </div>
-    <shop-cart></shop-cart>
+    <shop-cart :select-foods="selectFoods"></shop-cart>
   </div>
 </template>
 
@@ -42,10 +45,12 @@
 import {goods} from './data'
 import BSroll from 'better-scroll'
 import shopCart from './shopCart'
+import cartControl from './cartControl'
 export default {
   name: 'menueView',
   components: {
-    shopCart
+    shopCart,
+    cartControl
   },
   data() {
     return {
@@ -64,6 +69,17 @@ export default {
         }
       }
       return 0;
+    },
+    selectFoods() {
+      let foods = [];
+      this.goods.forEach( good => {
+        good.foods.forEach( food => {
+          if(food.count) {
+            foods.push(food);
+          }
+        });
+      });
+      return foods; 
     }
   },
   methods: {
@@ -74,7 +90,9 @@ export default {
         click: true
       });
       this.contentScroll = new BSroll(content, {
-        probeType: 3
+        probeType: 3,
+        click: true,
+        bounce: false
       });
       this.contentScroll.on('scroll', (pos) => {
         this.scrollY = Math.abs(Math.round(pos.y));
@@ -114,15 +132,14 @@ export default {
 @import '../../common/less/common.less';
 .menue-view{
   display: flex;
-  position: absolute;
-  top: 362.45/75*1rem;
   width: 100%;
-  bottom: 92/75*1rem;
+  height: 100%;
   overflow: hidden;
   .menu-category{
     flex: 0 0 160/75*1rem;
     .width(160);
     background: #f8f8f8;
+    height: 67%;
     .menu-item{
       .pd(0, 24, 0, 24);
       display: table;
@@ -157,6 +174,7 @@ export default {
   }
   .menu-content{
     flex:1;
+    height: 67%;
     .title{
       .pl(28);
       .height(52);
@@ -186,6 +204,7 @@ export default {
       }
       .content{
         flex:1;
+        position: relative;
         .name{
           .mg(4, 0, 16, 0);
           .height(28);
@@ -220,6 +239,11 @@ export default {
             .fs(20);
             color: rgb(147, 153, 159);
           }
+        }
+        .cart-wrapper{
+          position: absolute;
+          right: 0;
+          bottom: 24/75*1rem;
         }
       }
     }
