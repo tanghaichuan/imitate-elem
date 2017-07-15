@@ -91,8 +91,7 @@ export default {
       });
       this.contentScroll = new BSroll(content, {
         probeType: 3,
-        click: true,
-        bounce: false
+        click: true
       });
       this.contentScroll.on('scroll', (pos) => {
         this.scrollY = Math.abs(Math.round(pos.y));
@@ -139,7 +138,7 @@ export default {
     flex: 0 0 160/75*1rem;
     .width(160);
     background: #f8f8f8;
-    height: 67%;
+    height: 57%;
     .menu-item{
       .pd(0, 24, 0, 24);
       display: table;
@@ -174,7 +173,7 @@ export default {
   }
   .menu-content{
     flex:1;
-    height: 67%;
+    height: 57%;
     .title{
       .pl(28);
       .height(52);
