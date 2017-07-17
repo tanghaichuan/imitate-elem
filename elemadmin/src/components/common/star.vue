@@ -54,8 +54,8 @@ export default {
   .fs(0);
   .star-item{
     display: inline-block;
-    .width(40);
-    .height(40);
+    .width(35);
+    .height(35);
     .mr(7);
     &:last-child{
       .mr(0);

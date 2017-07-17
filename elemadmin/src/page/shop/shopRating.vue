@@ -7,20 +7,44 @@
           <div class="title">综合评价</div>
           <div class="rank">高于周边商家69.2%</div>
         </div>
-        <div class="overright"></div>
+        <div class="overright">
+          <div class="score-wrapper">
+            <span class="title">服务态度</span>
+            <star :score="4.1"></star>
+            <span class="score">3.6</span>
+          </div>
+          <div class="score-wrapper">
+            <span class="title">商品评分</span>
+            <star :score="4.1"></star>
+            <span class="score">3.6</span>
+          </div>
+          <div class="delivery-wrapper">
+            <div class="title">送达时间</div>
+            <div class="time">44分钟</div>
+          </div>
+        </div>
       </div>
+      <feedback></feedback>
+      <rating-list></rating-list>
     </div>
   </div>
 </template>
 
 <script>
-
+import star from '../../components/common/star'
+import feedback from './feedback'
+import ratingList from './ratingList'
 export default {
   name: 'shopRating',
   data() {
     return {
 
     }
+  },
+  components: {
+    star,
+    feedback,
+    ratingList
   },
   methods: {
     
@@ -69,6 +93,44 @@ export default {
       .overright{
         flex: 1;
         .pl(48);
+        .score-wrapper{
+          .lh(30);
+          .fs(0);
+          display: flex;
+          align-items: center;
+          .title{
+            display: inline-block;
+            .fs(24);
+            color: rgb(7, 17, 27);
+          }
+          .star{
+            display: inline-block;
+            .ml(24);
+            .mr(24);
+          }
+          .score{
+            display: inline-block;
+            .fs(30);
+            .pb(10);
+            color: rgb(255, 153, 0);
+          }
+        }
+        .delivery-wrapper{
+          .pt(4);
+          .title{
+            display: inline-block;
+            .fs(24);
+            color: rgb(7, 17, 27);
+            .lh(36);
+            .mr(20);
+          }
+          .time{
+            display: inline-block;
+            .fs(28);
+            color: rgb(147, 153, 159);
+            .lh(36);
+          }
+        }
       }
     }
   }
