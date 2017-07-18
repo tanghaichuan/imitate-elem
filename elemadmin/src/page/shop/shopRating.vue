@@ -24,13 +24,19 @@
           </div>
         </div>
       </div>
-      <feedback></feedback>
-      <rating-list></rating-list>
+      <div class="space"></div>
+      <div class="rating">
+        <feedback></feedback>
+        <rating-list></rating-list>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+const POSITIVE = 0;
+const NEGATIVE = 1;
+const ALL = 2;
 import star from '../../components/common/star'
 import feedback from './feedback'
 import ratingList from './ratingList'
@@ -38,7 +44,18 @@ export default {
   name: 'shopRating',
   data() {
     return {
-
+      selectType: ALL,
+      onlyContent: false,
+      desc: {
+        type: Object,
+        default() {
+          return {
+            all: "全部",
+            positive: "推荐",
+            negative: "吐槽"
+          }
+        }
+      }
     }
   },
   components: {
@@ -60,6 +77,17 @@ export default {
   height: 100%;
   overflow: hidden;
   .rating-content{
+    .space{
+      width: 100%;
+      .height(32);
+      border-top: 1px solid rgba(7, 17, 27, 0.1);
+      border-bottom: 1px solid rgba(7, 17, 27, 0.1);
+      background: #f3f5f7;
+    }
+    .rating{
+      .pt(36);
+      .ml(36);
+    }
     .overview{
       display: flex;
       .pt(36);

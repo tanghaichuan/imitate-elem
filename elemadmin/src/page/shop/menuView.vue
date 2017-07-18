@@ -105,7 +105,6 @@ export default {
         let item = contentList[i];
         height += item.clientHeight;
         this.listHeight.push(height);
-
       }
     },
     selectMenu(index,event) {
