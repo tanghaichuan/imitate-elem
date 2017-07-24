@@ -19,7 +19,7 @@
         </div>
       </div>
     </div>
-    <span class="icon-keyboard_arrow_right"></span>
+    <span class="icon-keyboard_arrow_right" @click="showShopDetails"></span>
     <div class="shop-header-activities">
       <div class="activity-wrapper" @click="toggleModal">
         <span class="icon decrease"></span>
@@ -54,10 +54,14 @@ export default {
   },
   methods: {
     ...mapMutations([
-      'TOGGLE_MODAL'
+      'TOGGLE_MODAL',
+      'TOGGLE_SHOPDETAILS'
     ]),
     toggleModal(){
       this.TOGGLE_MODAL();
+    },
+    showShopDetails() {
+      this.TOGGLE_SHOPDETAILS();
     }
   }
 }

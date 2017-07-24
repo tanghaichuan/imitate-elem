@@ -25,14 +25,16 @@ export default new Router({
   routes: [
     {
       	path: '/',
-      	component: login
+      	component: login,
+        keepAlive: true
     },
     {
     	path: '/home',
     	component: home,
     	name: '',
       meta: {
-          requireAuth: true
+          requireAuth: true,
+          keepAlive: true
       },
     	children: [{
     	  path: '',

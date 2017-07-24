@@ -5,7 +5,8 @@ import mutations from './mutations'
 Vue.use(Vuex)
 
 const state = {
-	showModal: false					// 切换商铺页店家公告蒙版
+	showModal: false,					// 切换商铺页店家公告蒙版
+	toggleShopDetails: false            // 商家详情页
 }
 
 export default new Vuex.Store({

@@ -12,6 +12,7 @@
     <menu-view v-show="changeShowType==='food'"></menu-view>
     <shop-rating v-show="changeShowType==='rating'"></shop-rating>
     <modal-container v-show="showModal"></modal-container>
+    <shop-details v-if="toggleShopDetails"></shop-details>
   </div>
 </template>
 
@@ -21,22 +22,25 @@ import shopHeader from './shopHeader'
 import menuView from './menuView'
 import shopRating from './shopRating'
 import modalContainer from './modalContainer'
+import shopDetails from './shopDetails'
 export default {
   name: 'shop',
   components:{
     shopHeader,
     menuView,
     shopRating,
-    modalContainer
+    modalContainer,
+    shopDetails
   },
   data() {
     return {
-      changeShowType:"food",
+      changeShowType:"food"
     }
   },
   computed:{
     ...mapState([
-      'showModal'
+      'showModal',
+      'toggleShopDetails'
     ])
   },
   methods: {

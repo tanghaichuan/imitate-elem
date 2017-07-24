@@ -45,17 +45,7 @@ export default {
   data() {
     return {
       selectType: ALL,
-      onlyContent: false,
-      desc: {
-        type: Object,
-        default() {
-          return {
-            all: "全部",
-            positive: "推荐",
-            negative: "吐槽"
-          }
-        }
-      }
+      onlyContent: false
     }
   },
   components: {

@@ -64,7 +64,8 @@ class Admin{
 						status: 1,
 						success: '登录成功',
 						data:rows
-					})
+					});
+					res.end();
 				}
 			}
 			catch(err) {
@@ -149,12 +150,14 @@ class Admin{
 					status: 1,
 					success: '退出成功'
 				})
+				res.end();
 				return
 			}else{
 				res.send({
 					status: 1,
 					success: '退出成功'
 				})
+				res.end();
 			}
 			
 		}catch(err) {
@@ -163,6 +166,7 @@ class Admin{
 				status: 0,
 				message: '退出失败'
 			})
+			res.end();
 		}
 	}
 
