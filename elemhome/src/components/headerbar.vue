@@ -1,10 +1,10 @@
 <template>
   <div class="headerbar">
   	<el-row>
-		<el-col :span="5">
+		<el-col :span="7">
 			<breadcrumb></breadcrumb>
 		</el-col>
-	  	<el-col :span="5" :offset="14">
+	  	<el-col :span="7" :offset="0" style="width:65%;text-align:right">
 			<el-dropdown 
 		    @command="handleCommand" 
 		    trigger="click"
@@ -113,13 +113,14 @@ export default {
 	}
 }
 .userInfo{
-	margin: 3px 0;
+	display: inline-block;
+	text-align: right;
+	margin: 3px 13px 0 0;
+	padding-right: 15px;
 	height: 36px;
 	display: flex;
 	align-items: center;
 	float: left;
-	width: 151px;
-	margin-right: 13px;
 	border-right: 1px solid;
 	border-right-color: #d9dbdb;
 	.username{

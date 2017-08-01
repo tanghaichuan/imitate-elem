@@ -1,14 +1,14 @@
 <template>
   <div class="home">
   	<el-row>
-  		<el-col :span="4" style="height:100%;background-color:rgb(50, 64, 87);">
+  		<el-col :span="4" style="min-height:100%;background-color:rgb(50, 64, 87);">
     		<navmenu></navmenu>
     	</el-col>	
-    	<el-col :span="20">
+    	<el-col :span="20" style="height: 100%; overflow: auto;">
     		<el-col :span="24">
 				<headerbar></headerbar>
     		</el-col>
-    		<el-col :span="24" style="padding: 25px 40px 0 40px;">
+    		<el-col :span="24" style="padding: 25px 40px 0 60px;">
     			<router-view></router-view>
     		</el-col>
     	</el-col>
