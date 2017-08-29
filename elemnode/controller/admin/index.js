@@ -1,21 +1,16 @@
-
 import crypto from 'crypto'
 import formidable from 'formidable'
 import dtime from 'time-formater'
 import query from '../../mysql/index';
 
-class Admin{
-	constructor(){
+class Admin {
+	constructor() {
 		this.login = this.login.bind(this)
 		this.register = this.register.bind(this)
 		this.encryption = this.encryption.bind(this)
 	}
-	async test() {
-		return 1;
-	}
-	async login(req,res,next) {
-		// formidable表单数据处理模块
-		const form =await new formidable.IncomingForm();
+	async login(req, res, next) {
+		const form = await new formidable.IncomingForm();
 		form.parse(req, async(err, fields, files) => {
 			if (err) {
 				res.send({
@@ -25,21 +20,19 @@ class Admin{
 				})
 				return
 			}
-			const {username, password, status = 2} = fields;
-			/*res.send({
-				username:username,
-				password:password,
-				status:2
-			})*/
+			const {
+				username,
+				password,
+				status = 2
+			} = fields;
+			
 			try {
-				if(!username) {
+				if (!username) {
 					throw new Error('用户名参数错误');
-				}
-				else if(!password){
+				} else if (!password) {
 					throw new Error('密码参数错误');
 				}
-			}
-			catch(err){
+			} catch (err) {
 				res.send({
 					status: 0,
 					type: 'GET_ERROR_PARAM',
@@ -51,31 +44,30 @@ class Admin{
 			try {
 				let sql = `select * from admin where username='${username}' and password='${md5Pwd}'`;
 				let rows = await query(sql);
-				if(rows.length === 0) {
+				if (!rows[0]) {
 					res.send({
 						status: 0,
 						type: 'LOGIN_ADMIN_FAILED',
 						message: '登录管理员失败',
 					})
-				}else{
+				} else {
 					//记录session
-					req.session.admin_id = rows.id;
+					req.session.admin_id = rows[0].id;
 					res.send({
 						status: 1,
 						success: '登录成功',
-						data:rows
+						data: rows[0]
 					});
 					res.end();
 				}
-			}
-			catch(err) {
+			} catch (err) {
 				console.log(err);
 			}
 
 		})
 	}
 
-	async register(req,res,next) {
+	async register(req, res, next) {
 		let password = '123456';
 		const username = 'admin';
 		const newPwd = this.encryption(password);
@@ -83,15 +75,15 @@ class Admin{
 		const status = 2;
 		//const sql = "insert into admin(username,password,create_time,status) values("+ username + "," + password + "," + create_time+ "," + status+")";
 		let sql = `insert into admin(username,password,create_time,status) values('${username}','${newPwd}','${create_time}','${status}')`;
-		let select = `select * from admin`; 
+		let select = `select * from admin`;
 		query(sql, (err, rows) => {
-			if(err){
+			if (err) {
 				res.send(err);
-				console.log("注册失败");
-			}else{
+				console.log("注册失败" );
+			} else {
 				res.send("注册成功");
 				console.log("注册成功");
-				
+
 			}
 		});
 		/*const form = new formidable.IncomingForm();
@@ -144,7 +136,7 @@ class Admin{
 	}
 	async singout(req, res, next) {
 		try {
-			if(req.session.admin_id){
+			if (req.session.admin_id) {
 				delete req.session.admin_id;
 				res.send({
 					status: 1,
@@ -152,15 +144,15 @@ class Admin{
 				})
 				res.end();
 				return
-			}else{
+			} else {
 				res.send({
 					status: 1,
 					success: '退出成功'
 				})
 				res.end();
 			}
-			
-		}catch(err) {
+
+		} catch (err) {
 			console.log('退出失败', err)
 			res.send({
 				status: 0,
@@ -172,7 +164,7 @@ class Admin{
 
 	async getAdminInfo(req, res, next) {
 		const admin_id = req.session.admin_id;
-		if(!admin_id || !Number(admin_id)) {
+		if (!admin_id || !Number(admin_id)) {
 			res.send({
 				status: 0,
 				type: 'ERROR_SESSION',
@@ -183,15 +175,15 @@ class Admin{
 		try {
 			let sql = `select * from admin where id = '${admin_id}'`;
 			const adminInfo = await query(sql);
-			if (!adminInfo) {
+			if (!adminInfo[0]) {
 				throw new Error('未找到当前管理员');
-			}else{
+			} else {
 				res.send({
 					status: 1,
-					data: adminInfo
+					data: adminInfo[0]
 				})
 			}
-		} catch(err) {
+		} catch (err) {
 			res.send({
 				status: 0,
 				type: 'GET_ADMIN_INFO_FAILED',
@@ -200,12 +192,12 @@ class Admin{
 		}
 	}
 
-	encryption(password){
+	encryption(password) {
 		const newpassword = this.Md5(this.Md5(password).substr(2, 7) + this.Md5(password));
 		return newpassword
 	}
 
-	Md5(password){
+	Md5(password) {
 		const md5 = crypto.createHash('md5');
 		return md5.update(password).digest('base64');
 	}

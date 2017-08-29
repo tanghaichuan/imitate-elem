@@ -1,0 +1,8 @@
+class Captchas {
+    constructor() {
+
+    }
+    getCaptchas() {
+        
+    }
+}
